@@ -1,46 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Missions{% endblock %}
+{% block title %}Missions
+{% endblock %}
 
 {% block body %}
-    <h1>Missions</h1>
+	<h1>Missions</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ mission.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ mission.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ mission.description }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ mission.code }}</td>
-            </tr>
-            <tr>
-                <th>Country</th>
-                <td>{{ mission.country }}</td>
-            </tr>
-            <tr>
-                <th>StartDate</th>
-                <td>{{ mission.startDate ? mission.startDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndDate</th>
-                <td>{{ mission.endDate ? mission.endDate|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ mission.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ mission.title }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ mission.description }}</td>
+			</tr>
+			<tr>
+				<th>Code</th>
+				<td>{{ mission.code }}</td>
+			</tr>
+			<tr>
+				<th>Country</th>
+				<td>{{ mission.country }}</td>
+			</tr>
+			<tr>
+				<th>StartDate</th>
+				<td>{{ mission.startDate ? mission.startDate|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>EndDate</th>
+				<td>{{ mission.endDate ? mission.endDate|date('Y-m-d') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('missions_index') }}">back to list</a>
+	<a href="{{ path('app.home') }}">back to list</a>
 
-    <a href="{{ path('missions_edit', {'id': mission.id}) }}">edit</a>
+	<a href="{{ path('missions_edit', {'id': mission.id}) }}">edit</a>
 
-    {{ include('missions/_delete_form.html.twig') }}
+	{{ include('missions/_delete_form.html.twig') }}
 {% endblock %}

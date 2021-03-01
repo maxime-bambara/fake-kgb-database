@@ -29,9 +29,15 @@ class Skills
      */
     private $missions;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Agents::class, mappedBy="skills", cascade={"persist"})
+     */
+    private $agents;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
+        $this->agents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +82,33 @@ class Skills
             if ($mission->getSkills() === $this) {
                 $mission->setSkills(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agents[]
+     */
+    public function getAgents(): Collection
+    {
+        return $this->agents;
+    }
+
+    public function addAgent(Agents $agent): self
+    {
+        if (!$this->agents->contains($agent)) {
+            $this->agents[] = $agent;
+            $agent->addSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agents $agent): self
+    {
+        if ($this->agents->removeElement($agent)) {
+            $agent->removeSkill($this);
         }
 
         return $this;

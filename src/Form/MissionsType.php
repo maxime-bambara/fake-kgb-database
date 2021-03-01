@@ -6,6 +6,7 @@ use App\Entity\Agents;
 use App\Entity\Skills;
 use App\Entity\Targets;
 use App\Entity\Contacts;
+use App\Entity\Hideaway;
 use App\Entity\Missions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,7 +43,7 @@ class MissionsType extends AbstractType
             ])
             ->add('hideaway', EntityType::class, [
                 'choice_label' => 'alias',
-                'class' => Skills::class,
+                'class' => Hideaway::class,
             ])
             ->add('contacts', EntityType::class, [
                 'choice_label' => 'code',

@@ -39,7 +39,7 @@ class MissionsController extends AbstractController
             $entityManager->persist($mission);
             $entityManager->flush();
 
-            return $this->redirectToRoute('missions_index');
+            return $this->redirectToRoute('app.home');
         }
 
         return $this->render('missions/new.html.twig', [
@@ -69,7 +69,7 @@ class MissionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('missions_index');
+            return $this->redirectToRoute('app.home');
         }
 
         return $this->render('missions/edit.html.twig', [
@@ -89,6 +89,6 @@ class MissionsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('missions_index');
+        return $this->redirectToRoute('app.home');
     }
 }

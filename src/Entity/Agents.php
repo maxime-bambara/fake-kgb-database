@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\AgentsRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity(repositoryClass=AgentsRepository::class)
@@ -49,9 +52,15 @@ class Agents
      */
     private $missions;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Skills::class, inversedBy="agents", cascade={"persist"})
+     */
+    private $skills;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,12 +92,12 @@ class Agents
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
+    public function getBirthday(): ?DateTimeInterface
     {
         return $this->birthday;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday): self
+    public function setBirthday(DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
 
@@ -142,6 +151,30 @@ class Agents
         if ($this->missions->removeElement($mission)) {
             $mission->removeAgent($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skills[]
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skills $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skills $skill): self
+    {
+        $this->skills->removeElement($skill);
 
         return $this;
     }
