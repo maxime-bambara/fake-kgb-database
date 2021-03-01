@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HideawayRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Hideaway
      * @ORM\Column(type="string", length=255)
      */
     private $alias;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Missions::class, mappedBy="hideaway")
+     */
+    private $missions;
+
+    public function __construct()
+    {
+        $this->missions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Hideaway
     public function setAlias(string $alias): self
     {
         $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Missions[]
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Missions $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions[] = $mission;
+            $mission->setHideaway($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Missions $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            // set the owning side to null (unless already changed)
+            if ($mission->getHideaway() === $this) {
+                $mission->setHideaway(null);
+            }
+        }
 
         return $this;
     }
