@@ -72,8 +72,7 @@ class Missions
     private $contacts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Targets::class, inversedBy="missions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Targets::class, inversedBy="missions")
      */
     private $targets;
 
@@ -163,7 +162,7 @@ class Missions
     /**
      * @return Collection|Agents[]
      */
-    public function getAgents(): Collection
+    public function getAgents(): ?Collection
     {
         return $this->agents;
     }
@@ -211,7 +210,7 @@ class Missions
     /**
      * @return Collection|Contacts[]
      */
-    public function getContacts(): Collection
+    public function getContacts(): ?Collection
     {
         return $this->contacts;
     }
@@ -232,14 +231,26 @@ class Missions
         return $this;
     }
 
-    public function getTargets(): ?Targets
+    /**
+     * @return Collection|Targets[]
+     */
+    public function getTargets(): ?Collection
     {
         return $this->targets;
     }
 
-    public function setTargets(?Targets $targets): self
+    public function addTarget(Targets $target): self
     {
-        $this->targets = $targets;
+        if (!$this->contacts->contains($target)) {
+            $this->contacts[] = $target;
+        }
+
+        return $this;
+    }
+
+    public function removeTarget(Targets $target): self
+    {
+        $this->contacts->removeElement($target);
 
         return $this;
     }

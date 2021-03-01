@@ -45,7 +45,7 @@ class Targets
     private $nationality;
 
     /**
-     * @ORM\OneToMany(targetEntity=Missions::class, mappedBy="targets")
+     * @ORM\ManyToMany(targetEntity=Missions::class, mappedBy="targets")
      */
     private $missions;
 
@@ -131,7 +131,7 @@ class Targets
     {
         if (!$this->missions->contains($mission)) {
             $this->missions[] = $mission;
-            $mission->setTargets($this);
+            $mission->addTarget($this);
         }
 
         return $this;
@@ -140,10 +140,7 @@ class Targets
     public function removeMission(Missions $mission): self
     {
         if ($this->missions->removeElement($mission)) {
-            // set the owning side to null (unless already changed)
-            if ($mission->getTargets() === $this) {
-                $mission->setTargets(null);
-            }
+            $mission->removeTarget($this);
         }
 
         return $this;

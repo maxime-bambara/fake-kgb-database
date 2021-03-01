@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Agents;
 use App\Entity\Missions;
 use App\Form\MissionsType;
 use App\Repository\MissionsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/")
- */
+
 class MissionsController extends AbstractController
 {
     /**
-     * @Route("/", name="missions_index", methods={"GET"})
+     * @Route("/", name="app.home", methods={"GET"})
      */
     public function index(MissionsRepository $missionsRepository): Response
     {
