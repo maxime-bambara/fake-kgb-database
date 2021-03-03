@@ -6,9 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MissionsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\Collections;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=MissionsRepository::class)
+ * @UniqueEntity(fields={"title"})
+ * @UniqueEntity(fields={"code"})
  */
 class Missions
 {
@@ -21,59 +28,85 @@ class Missions
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $country;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank
+     * @Assert\Type("DateTimeInterface")
+     * @Assert\GreaterThanOrEqual("today UTC")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank
+     * @Assert\Type("DateTimeInterface")
+     * @Assert\GreaterThanOrEqual(propertyPath="startDate")
      */
     private $endDate;
 
     /**
      * @ORM\ManyToMany(targetEntity=Agents::class, inversedBy="missions")
+     * @Assert\NotBlank
+     * @ORM\JoinColumn(nullable=false)
+     * @Collections
      */
     private $agents;
 
     /**
      * @ORM\ManyToOne(targetEntity=Skills::class, inversedBy="missions")
+     * @Assert\NotBlank
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Type("object")
      */
     private $skills;
 
     /**
      * @ORM\ManyToOne(targetEntity=Hideaway::class, inversedBy="missions")
+     * @Assert\NotBlank
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Type("object")
      */
     private $hideaway;
 
     /**
      * @ORM\ManyToMany(targetEntity=Contacts::class, inversedBy="missions")
+     * @Assert\NotBlank
+     * @ORM\JoinColumn(nullable=false)
+     * @Collections
      */
     private $contacts;
 
     /**
      * @ORM\ManyToMany(targetEntity=Targets::class, inversedBy="missions")
-     * *@ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
+     * @ORM\JoinColumn(nullable=false)
+     * @Collections
      */
     private $targets;
 
@@ -81,6 +114,7 @@ class Missions
     {
         $this->agents = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->targets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,7 +269,7 @@ class Missions
     /**
      * @return Collection|Targets[]
      */
-    public function getTargets(): ?Collection
+    public function getTargets(): Collection
     {
         return $this->targets;
     }
