@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Hideaway{% endblock %}
+
+{% block body %}
+    <h1>Edit Hideaway</h1>
+
+    {{ include('hideaway/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('hideaway_index') }}">back to list</a>
+
+    {{ include('hideaway/_delete_form.html.twig') }}
+{% endblock %}

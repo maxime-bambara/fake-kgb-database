@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Skills{% endblock %}
+
+{% block body %}
+    <h1>Skills</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ skill.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ skill.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('skills_index') }}">back to list</a>
+
+    <a href="{{ path('skills_edit', {'id': skill.id}) }}">edit</a>
+
+    {{ include('skills/_delete_form.html.twig') }}
+{% endblock %}

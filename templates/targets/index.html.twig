@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Targets index{% endblock %}
+
+{% block body %}
+    <h1>Targets index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>Birthday</th>
+                <th>Alias</th>
+                <th>Nationality</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for target in targets %}
+            <tr>
+                <td>{{ target.id }}</td>
+                <td>{{ target.lastName }}</td>
+                <td>{{ target.firstName }}</td>
+                <td>{{ target.birthday ? target.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ target.alias }}</td>
+                <td>{{ target.nationality }}</td>
+                <td>
+                    <a href="{{ path('targets_show', {'id': target.id}) }}">show</a>
+                    <a href="{{ path('targets_edit', {'id': target.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('targets_new') }}">Create new</a>
+{% endblock %}

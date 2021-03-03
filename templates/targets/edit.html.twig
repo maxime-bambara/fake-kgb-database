@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Targets{% endblock %}
+
+{% block body %}
+    <h1>Edit Targets</h1>
+
+    {{ include('targets/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('targets_index') }}">back to list</a>
+
+    {{ include('targets/_delete_form.html.twig') }}
+{% endblock %}

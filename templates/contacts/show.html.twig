@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+    <h1>Contacts</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contact.id }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ contact.lastName }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ contact.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ contact.birthday ? contact.birthday|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ contact.code }}</td>
+            </tr>
+            <tr>
+                <th>Nationality</th>
+                <td>{{ contact.nationality }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('contacts_index') }}">back to list</a>
+
+    <a href="{{ path('contacts_edit', {'id': contact.id}) }}">edit</a>
+
+    {{ include('contacts/_delete_form.html.twig') }}
+{% endblock %}
