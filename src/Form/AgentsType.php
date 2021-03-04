@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Agents;
+use App\Entity\Skills;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 class AgentsType extends AbstractType
 {
@@ -17,9 +20,12 @@ class AgentsType extends AbstractType
             ->add('birthday')
             ->add('code')
             ->add('nationality')
-            ->add('missions')
-            ->add('skills')
-        ;
+            ->add('skills', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Skills::class,
+                'multiple' => true,
+                'expanded' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

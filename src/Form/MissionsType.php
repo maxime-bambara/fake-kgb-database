@@ -31,15 +31,21 @@ class MissionsType extends AbstractType
             ->add('endDate', DateType::class, [
                 'format' => 'dd-MM-yyyy',
             ])
+            ->add('skills', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Skills::class,
+            ])
+            ->add('targets', EntityType::class, [
+                'choice_label' => 'alias',
+                'class' => Targets::class,
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('agents', EntityType::class, [
                 'choice_label' => 'code',
                 'class' => Agents::class,
                 'multiple' => true,
                 'expanded' => true,
-            ])
-            ->add('skills', EntityType::class, [
-                'choice_label' => 'name',
-                'class' => Skills::class,
             ])
             ->add('hideaway', EntityType::class, [
                 'choice_label' => 'alias',
@@ -48,12 +54,6 @@ class MissionsType extends AbstractType
             ->add('contacts', EntityType::class, [
                 'choice_label' => 'code',
                 'class' => Contacts::class,
-                'multiple' => true,
-                'expanded' => true,
-            ])
-            ->add('targets', EntityType::class, [
-                'choice_label' => 'alias',
-                'class' => Targets::class,
                 'multiple' => true,
                 'expanded' => true,
             ]);

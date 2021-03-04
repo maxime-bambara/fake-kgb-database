@@ -16,9 +16,7 @@ class TargetsType extends AbstractType
             ->add('firstName')
             ->add('birthday')
             ->add('alias')
-            ->add('nationality')
-            ->add('missions')
-        ;
+            ->add('nationality');
     }
 
     public function configureOptions(OptionsResolver $resolver)

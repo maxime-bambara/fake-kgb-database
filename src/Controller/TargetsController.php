@@ -9,14 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
-/**
- * @Route("/targets")
- */
+
+
+
+
+
 class TargetsController extends AbstractController
 {
     /**
-     * @Route("/", name="app.targets.index", methods={"GET"})
+     * @Route("/targets", name="app.targets.index", methods={"GET"})
      */
     public function index(TargetsRepository $targetsRepository): Response
     {
@@ -26,7 +29,7 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="targets_new", methods={"GET","POST"})
+     * @Route("/targets/new", name="app.targets.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +52,7 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app.targets.show", methods={"GET"})
+     * @Route("/targets/{id}", name="app.targets.show", methods={"GET"})  
      */
     public function show(Targets $target): Response
     {
@@ -59,8 +62,8 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app.targets.edit", methods={"GET","POST"})
-     */
+     * @Route("/targets/{id}/edit", name="app.targets.edit", methods={"GET","POST"})
+     * */
     public function edit(Request $request, Targets $target): Response
     {
         $form = $this->createForm(TargetsType::class, $target);
@@ -79,7 +82,7 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app.targets.delete", methods={"DELETE"})
+     * @Route("/targets/{id}", name="app.targets.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Targets $target): Response
     {

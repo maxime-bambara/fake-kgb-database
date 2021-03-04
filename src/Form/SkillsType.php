@@ -12,9 +12,7 @@ class SkillsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('agents')
-        ;
+            ->add('name');
     }
 
     public function configureOptions(OptionsResolver $resolver)

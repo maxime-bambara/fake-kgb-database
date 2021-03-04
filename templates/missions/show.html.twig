@@ -29,6 +29,14 @@
 				<td>{{ mission.country }}</td>
 			</tr>
 			<tr>
+				<th>Agents</th>
+				<td>
+					{% for agents in mission.agents %}
+						<li>{{agents.code}}</li>
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
 				<th>StartDate</th>
 				<td>{{ mission.startDate ? mission.startDate|date('Y-m-d') : '' }}</td>
 			</tr>

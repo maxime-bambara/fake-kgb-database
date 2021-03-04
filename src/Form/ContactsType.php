@@ -16,9 +16,7 @@ class ContactsType extends AbstractType
             ->add('firstName')
             ->add('birthday')
             ->add('code')
-            ->add('nationality')
-            ->add('missions')
-        ;
+            ->add('nationality');
     }
 
     public function configureOptions(OptionsResolver $resolver)

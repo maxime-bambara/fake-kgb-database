@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Agents;
 use App\Entity\Missions;
 use App\Form\MissionsType;
 use App\Repository\MissionsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +15,7 @@ class MissionsController extends AbstractController
 {
     /**
      * @Route("/", name="app.home", methods={"GET"})
+     * 
      */
     public function index(MissionsRepository $missionsRepository): Response
     {
@@ -26,7 +25,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app.missions.new", methods={"GET","POST"})
+     * @Route("/missions/new", name="app.missions.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +48,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app.missions.show", methods={"GET"})
+     * @Route("/missions/{id}", name="app.missions.show", methods={"GET"})
      */
     public function show(Missions $mission): Response
     {
@@ -59,7 +58,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app.missions.edit", methods={"GET","POST"})
+     * @Route("/missions/{id}/edit", name="app.missions.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Missions $mission): Response
     {
@@ -79,7 +78,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app.missions.delete", methods={"DELETE"})
+     * @Route("/missions/{id}", name="app.missions.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Missions $mission): Response
     {

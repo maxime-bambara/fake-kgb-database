@@ -26,7 +26,7 @@ class SkillsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="skills_new", methods={"GET","POST"})
+     * @Route("/new", name="app.skills.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
