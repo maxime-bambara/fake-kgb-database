@@ -26,7 +26,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="missions_new", methods={"GET","POST"})
+     * @Route("/new", name="app.missions.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="missions_show", methods={"GET"})
+     * @Route("/{id}", name="app.missions.show", methods={"GET"})
      */
     public function show(Missions $mission): Response
     {
@@ -59,7 +59,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="missions_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app.missions.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Missions $mission): Response
     {
@@ -79,7 +79,7 @@ class MissionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="missions_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app.missions.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Missions $mission): Response
     {

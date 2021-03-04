@@ -1,42 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Targets{% endblock %}
+{% block title %}Targets
+{% endblock %}
 
 {% block body %}
-    <h1>Targets</h1>
+	<h1>Targets</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ target.id }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ target.lastName }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ target.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ target.birthday ? target.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Alias</th>
-                <td>{{ target.alias }}</td>
-            </tr>
-            <tr>
-                <th>Nationality</th>
-                <td>{{ target.nationality }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ target.id }}</td>
+			</tr>
+			<tr>
+				<th>LastName</th>
+				<td>{{ target.lastName }}</td>
+			</tr>
+			<tr>
+				<th>FirstName</th>
+				<td>{{ target.firstName }}</td>
+			</tr>
+			<tr>
+				<th>Birthday</th>
+				<td>{{ target.birthday ? target.birthday|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Alias</th>
+				<td>{{ target.alias }}</td>
+			</tr>
+			<tr>
+				<th>Nationality</th>
+				<td>{{ target.nationality }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('targets_index') }}">back to list</a>
+	<a href="{{ path('app.targets.index') }}">back to list</a>
 
-    <a href="{{ path('targets_edit', {'id': target.id}) }}">edit</a>
+	<a href="{{ path('app.targets.edit', {'id': target.id}) }}">edit</a>
 
-    {{ include('targets/_delete_form.html.twig') }}
+	{{ include('targets/_delete_form.html.twig') }}
 {% endblock %}

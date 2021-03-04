@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HideawayController extends AbstractController
 {
     /**
-     * @Route("/", name="hideaway_index", methods={"GET"})
+     * @Route("/", name="app.hideaway.index", methods={"GET"})
      */
     public function index(HideawayRepository $hideawayRepository): Response
     {
@@ -39,7 +39,7 @@ class HideawayController extends AbstractController
             $entityManager->persist($hideaway);
             $entityManager->flush();
 
-            return $this->redirectToRoute('hideaway_index');
+            return $this->redirectToRoute('app.hideaway.index');
         }
 
         return $this->render('hideaway/new.html.twig', [
@@ -49,7 +49,7 @@ class HideawayController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="hideaway_show", methods={"GET"})
+     * @Route("/{id}", name="app.hideaway.show", methods={"GET"})
      */
     public function show(Hideaway $hideaway): Response
     {
@@ -59,7 +59,7 @@ class HideawayController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="hideaway_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app.hideaway.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Hideaway $hideaway): Response
     {
@@ -69,7 +69,7 @@ class HideawayController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('hideaway_index');
+            return $this->redirectToRoute('app.hideaway.index');
         }
 
         return $this->render('hideaway/edit.html.twig', [
@@ -79,16 +79,16 @@ class HideawayController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="hideaway_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app.hideaway.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Hideaway $hideaway): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$hideaway->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $hideaway->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($hideaway);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('hideaway_index');
+        return $this->redirectToRoute('app.hideaway.index');
     }
 }

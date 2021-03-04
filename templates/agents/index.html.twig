@@ -1,43 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Agents index{% endblock %}
+{% block title %}Agents index
+{% endblock %}
 
 {% block body %}
-    <h1>Agents index</h1>
+	<h1>Agents index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>LastName</th>
-                <th>FirstName</th>
-                <th>Birthday</th>
-                <th>Code</th>
-                <th>Nationality</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for agent in agents %}
-            <tr>
-                <td>{{ agent.id }}</td>
-                <td>{{ agent.lastName }}</td>
-                <td>{{ agent.firstName }}</td>
-                <td>{{ agent.birthday ? agent.birthday|date('Y-m-d') : '' }}</td>
-                <td>{{ agent.code }}</td>
-                <td>{{ agent.nationality }}</td>
-                <td>
-                    <a href="{{ path('agents_show', {'id': agent.id}) }}">show</a>
-                    <a href="{{ path('agents_edit', {'id': agent.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>LastName</th>
+				<th>FirstName</th>
+				<th>Birthday</th>
+				<th>Code</th>
+				<th>Nationality</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for agent in agents %}
+				<tr>
+					<td>{{ agent.id }}</td>
+					<td>{{ agent.lastName }}</td>
+					<td>{{ agent.firstName }}</td>
+					<td>{{ agent.birthday ? agent.birthday|date('Y-m-d') : '' }}</td>
+					<td>{{ agent.code }}</td>
+					<td>{{ agent.nationality }}</td>
+					<td>
+						<a href="{{ path('app.agents.show', {'id': agent.id}) }}">show</a>
+						<a href="{{ path('app.agents.edit', {'id': agent.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('agents_new') }}">Create new</a>
+	<a href="{{ path('app.agents.new') }}">Create new</a>
 {% endblock %}

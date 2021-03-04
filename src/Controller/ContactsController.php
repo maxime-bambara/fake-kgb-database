@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactsController extends AbstractController
 {
     /**
-     * @Route("/", name="contacts_index", methods={"GET"})
+     * @Route("/", name="app.contacts.index", methods={"GET"})
      */
     public function index(ContactsRepository $contactsRepository): Response
     {
@@ -26,7 +26,7 @@ class ContactsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="contacts_new", methods={"GET","POST"})
+     * @Route("/new", name="app.contacts.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,7 @@ class ContactsController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contacts_index');
+            return $this->redirectToRoute('app.contacts.index');
         }
 
         return $this->render('contacts/new.html.twig', [
@@ -49,7 +49,7 @@ class ContactsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="contacts_show", methods={"GET"})
+     * @Route("/{id}", name="app.contacts.show", methods={"GET"})
      */
     public function show(Contacts $contact): Response
     {
@@ -59,7 +59,7 @@ class ContactsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="contacts_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app.contacts.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Contacts $contact): Response
     {
@@ -69,7 +69,7 @@ class ContactsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('contacts_index');
+            return $this->redirectToRoute('app.contacts.index');
         }
 
         return $this->render('contacts/edit.html.twig', [
@@ -79,16 +79,16 @@ class ContactsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="contacts_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app.contacts.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Contacts $contact): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $contact->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($contact);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('contacts_index');
+        return $this->redirectToRoute('app.contacts.index');
     }
 }

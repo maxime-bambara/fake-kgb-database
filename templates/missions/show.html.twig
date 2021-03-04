@@ -41,7 +41,7 @@
 
 	<a href="{{ path('app.home') }}">back to list</a>
 
-	<a href="{{ path('missions_edit', {'id': mission.id}) }}">edit</a>
+	<a href="{{ path('app.missions.edit', {'id': mission.id}) }}">edit</a>
 
 	{{ include('missions/_delete_form.html.twig') }}
 {% endblock %}

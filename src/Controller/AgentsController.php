@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgentsController extends AbstractController
 {
     /**
-     * @Route("/", name="agents_index", methods={"GET"})
+     * @Route("/", name="app.agents.index", methods={"GET"})
      */
     public function index(AgentsRepository $agentsRepository): Response
     {
@@ -26,7 +26,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="agents_new", methods={"GET","POST"})
+     * @Route("/new", name="app.agents.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,7 @@ class AgentsController extends AbstractController
             $entityManager->persist($agent);
             $entityManager->flush();
 
-            return $this->redirectToRoute('agents_index');
+            return $this->redirectToRoute('app.agents.index');
         }
 
         return $this->render('agents/new.html.twig', [
@@ -49,7 +49,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="agents_show", methods={"GET"})
+     * @Route("/{id}", name="app.agents.show", methods={"GET"})
      */
     public function show(Agents $agent): Response
     {
@@ -59,7 +59,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="agents_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app.agents.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Agents $agent): Response
     {
@@ -69,7 +69,7 @@ class AgentsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('agents_index');
+            return $this->redirectToRoute('app.agents.index');
         }
 
         return $this->render('agents/edit.html.twig', [
@@ -79,16 +79,16 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="agents_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app.agents.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Agents $agent): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$agent->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $agent->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($agent);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('agents_index');
+        return $this->redirectToRoute('app.agents.index');
     }
 }

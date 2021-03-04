@@ -1,38 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hideaway{% endblock %}
+{% block title %}Hideaway
+{% endblock %}
 
 {% block body %}
-    <h1>Hideaway</h1>
+	<h1>Hideaway</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ hideaway.id }}</td>
-            </tr>
-            <tr>
-                <th>Adress</th>
-                <td>{{ hideaway.adress }}</td>
-            </tr>
-            <tr>
-                <th>Country</th>
-                <td>{{ hideaway.country }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ hideaway.type }}</td>
-            </tr>
-            <tr>
-                <th>Alias</th>
-                <td>{{ hideaway.alias }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ hideaway.id }}</td>
+			</tr>
+			<tr>
+				<th>Adress</th>
+				<td>{{ hideaway.adress }}</td>
+			</tr>
+			<tr>
+				<th>Country</th>
+				<td>{{ hideaway.country }}</td>
+			</tr>
+			<tr>
+				<th>Type</th>
+				<td>{{ hideaway.type }}</td>
+			</tr>
+			<tr>
+				<th>Alias</th>
+				<td>{{ hideaway.alias }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('hideaway_index') }}">back to list</a>
+	<a href="{{ path('app.hideaway.index') }}">back to list</a>
 
-    <a href="{{ path('hideaway_edit', {'id': hideaway.id}) }}">edit</a>
+	<a href="{{ path('app.hideaway.edit', {'id': hideaway.id}) }}">edit</a>
 
-    {{ include('hideaway/_delete_form.html.twig') }}
+	{{ include('hideaway/_delete_form.html.twig') }}
 {% endblock %}

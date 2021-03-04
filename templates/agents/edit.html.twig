@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Agents{% endblock %}
+{% block title %}Edit Agents
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Agents</h1>
+	<h1>Edit Agents</h1>
 
-    {{ include('agents/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('agents/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('agents_index') }}">back to list</a>
+	<a href="{{ path('app.agents.index') }}">back to list</a>
 
-    {{ include('agents/_delete_form.html.twig') }}
+	{{ include('agents/_delete_form.html.twig') }}
 {% endblock %}

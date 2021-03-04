@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TargetsController extends AbstractController
 {
     /**
-     * @Route("/", name="targets_index", methods={"GET"})
+     * @Route("/", name="app.targets.index", methods={"GET"})
      */
     public function index(TargetsRepository $targetsRepository): Response
     {
@@ -39,7 +39,7 @@ class TargetsController extends AbstractController
             $entityManager->persist($target);
             $entityManager->flush();
 
-            return $this->redirectToRoute('targets_index');
+            return $this->redirectToRoute('app.targets.index');
         }
 
         return $this->render('targets/new.html.twig', [
@@ -49,7 +49,7 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="targets_show", methods={"GET"})
+     * @Route("/{id}", name="app.targets.show", methods={"GET"})
      */
     public function show(Targets $target): Response
     {
@@ -59,7 +59,7 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="targets_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app.targets.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Targets $target): Response
     {
@@ -69,7 +69,7 @@ class TargetsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('targets_index');
+            return $this->redirectToRoute('app.targets.index');
         }
 
         return $this->render('targets/edit.html.twig', [
@@ -79,16 +79,16 @@ class TargetsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="targets_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app.targets.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Targets $target): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$target->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $target->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($target);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('targets_index');
+        return $this->redirectToRoute('app.targets.index');
     }
 }
