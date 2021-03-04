@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class MissionsType extends AbstractType
 {
@@ -24,12 +25,29 @@ class MissionsType extends AbstractType
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
             ->add('code', TextType::class)
-            ->add('country', TextType::class)
+            ->add('country', ChoiceType::class, [
+                'choices' => [
+                    'Belgium' => 'Belgium',
+                    'Brazil' => 'Brazil',
+                    'China' => 'China',
+                    'Congo' => 'Congo',
+                    'France' => 'France',
+                    'Japan' => 'Japan',
+                    'UK' => 'UK',
+                    'USA' => 'USA',
+                    'Russia' => 'Russia',
+                    'Swiss' => 'Swiss',
+                ]
+            ])
             ->add('startDate', DateType::class, [
-                'format' => 'dd-MM-yyyy',
+                'widget' => 'choice',
+                'format' => 'y-M-d',
+                'years' => range(date("Y"), 2050)
             ])
             ->add('endDate', DateType::class, [
-                'format' => 'dd-MM-yyyy',
+                'widget' => 'choice',
+                'format' => 'y-M-d',
+                'years' => range(date("Y"), 2050)
             ])
             ->add('skills', EntityType::class, [
                 'choice_label' => 'name',

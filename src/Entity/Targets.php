@@ -6,6 +6,8 @@ use App\Repository\TargetsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=TargetsRepository::class)
@@ -31,6 +33,8 @@ class Targets
 
     /**
      * @ORM\Column(type="date")
+     *@Assert\LessThan("-18 years")
+     * @Assert\GreaterThan("-75 years")
      */
     private $birthday;
 

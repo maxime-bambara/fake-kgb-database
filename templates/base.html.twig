@@ -19,7 +19,11 @@
 	</head>
 	<body>
 		{{ include('navbar.html.twig') }}
-		<div class="container"> {% block body %}{% endblock %}
+		<div class="container">
+			<div class="row justify-content-center text-center">
+				<div class"col-auto"> {% block body %}{% endblock %}
+					</div>
+				</div>
 			</div>
 			<!-- Latest compiled and minified JavaScript -->
 		</body>

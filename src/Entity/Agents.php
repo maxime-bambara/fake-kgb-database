@@ -36,6 +36,8 @@ class Agents
     private $firstName;
 
     /**
+     * @Assert\LessThan("-18 years")
+     * @Assert\GreaterThan("-75 years")
      * @ORM\Column(type="date")
      */
     private $birthday;
