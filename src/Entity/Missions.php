@@ -9,8 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Validator\Collections;
-
-
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @ORM\Entity(repositoryClass=MissionsRepository::class)
@@ -287,5 +286,72 @@ class Missions
         $this->targets->removeElement($target);
 
         return $this;
+    }
+
+    public function contactsAreValid()
+    {
+        $dataCountry = $this->country;
+        $dataContacts = $this->contacts;
+
+        foreach ($dataContacts as $contact) {
+            if ($dataCountry != $contact->getNationality()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function hIdeawayIsValid()
+    {
+        $dataCountry = $this->country;
+        $dataHideaway = $this->hideaway;
+
+        if ($dataCountry != $dataHideaway) {
+            return false;
+        }
+        return true;
+    }
+
+    public function agentsSkillsAreValid()
+    {
+        $dataSkills = $this->skills;
+        $dataAgents = $this->agents;
+
+        $validSkillsAgents = 0;
+
+        foreach ($dataAgents as $agent) {
+            $agentSkills = $agent->displaySkills();
+            if (in_array($dataSkills, $agentSkills)) {
+                $validSkillsAgents += 1;
+            }
+            if ($validSkillsAgents == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function agentsNationalityAreValid()
+    {
+        $dataAgents = $this->agents;
+        $dataTargets = $this->targets;
+
+        foreach ($dataAgents as $agent) {
+            foreach ($dataTargets as $target) {
+                if ($agent->getNationality() == $target->getNationality()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public function missionIsValid()
+    {
+
+        if (!$this->contactsAreValid() || !$this->hideawayIsValid() || !$this->agentsSkillsAreValid() || !$this->agentsNationalityAreValid()) {
+            return false;
+        }
+        return true;
     }
 }

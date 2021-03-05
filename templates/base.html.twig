@@ -18,13 +18,21 @@
 		{% endblock %}
 	</head>
 	<body>
+
 		{{ include('navbar.html.twig') }}
 		<div class="container">
+
 			<div class="row justify-content-center text-center">
-				<div class"col-auto"> {% block body %}{% endblock %}
-					</div>
+				<div class"col-auto">
+					{% for message in app.flashes('error') %}
+						<div class="alert alert-error">
+							{{ message }}
+						</div>
+					{% endfor %}
+					{% block body %}{% endblock %}
 				</div>
 			</div>
-			<!-- Latest compiled and minified JavaScript -->
-		</body>
-	</html>
+		</div>
+		<!-- Latest compiled and minified JavaScript -->
+	</body>
+</html>

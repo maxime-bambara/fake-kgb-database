@@ -54,23 +54,32 @@ class MissionsType extends AbstractType
                 'class' => Skills::class,
             ])
             ->add('targets', EntityType::class, [
-                'choice_label' => 'alias',
+                'choice_label' => function ($targets) {
+                    return $targets->getAlias() . " (" . $targets->getNationality() . ")";
+                },
                 'class' => Targets::class,
                 'multiple' => true,
                 'expanded' => true,
             ])
             ->add('agents', EntityType::class, [
-                'choice_label' => 'code',
+                'choice_label' => function ($agents) {
+                    return $agents->getCode() . " (" . $agents->getNationality() . " | Skills :  " .
+                        implode(", ", $agents->displaySkills()) . ")";
+                },
                 'class' => Agents::class,
                 'multiple' => true,
                 'expanded' => true,
             ])
             ->add('hideaway', EntityType::class, [
-                'choice_label' => 'alias',
+                'choice_label' => function ($hideaway) {
+                    return $hideaway->getAlias() . " (" . $hideaway->getCountry() . ")";
+                },
                 'class' => Hideaway::class,
             ])
             ->add('contacts', EntityType::class, [
-                'choice_label' => 'code',
+                'choice_label' => function ($contacts) {
+                    return $contacts->getCode() . " (" . $contacts->getNationality() . ")";
+                },
                 'class' => Contacts::class,
                 'multiple' => true,
                 'expanded' => true,

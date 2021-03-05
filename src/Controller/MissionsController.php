@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../../vendor/autoload.php';
+
 use App\Entity\Missions;
 use App\Form\MissionsType;
 use App\Repository\MissionsRepository;
@@ -33,7 +35,12 @@ class MissionsController extends AbstractController
         $form = $this->createForm(MissionsType::class, $mission);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$mission->missionIsValid()) {
+                $this->addFlash('error', 'Your mission does not contain valids items. Please check the following: Agent(s) skill(s) / Nationality of agents or contacts / Hideaway country');
+                return $this->redirectToRoute('app.home');;
+            };
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($mission);
             $entityManager->flush();
@@ -66,6 +73,11 @@ class MissionsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$mission->missionIsValid()) {
+                $this->addFlash('error', 'Your mission does not contain valids items. Please check the following: Agent(s) skill(s) / Nationality of agents or contacts / Hideaway country');
+                return $this->redirectToRoute('app.home');;
+            };
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app.home');
