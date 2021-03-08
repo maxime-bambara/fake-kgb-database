@@ -14,42 +14,42 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @Route("/register", name="app.register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AdminAuthenticator $authenticator): Response
-    {
-        $user = new Admin();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/register", name="app.register")
+    //  */
+    // public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AdminAuthenticator $authenticator): Response
+    // {
+    //     $user = new Admin();
+    //     $form = $this->createForm(RegistrationFormType::class, $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $roles = ['ROLE_ADMIN'];
-            $user->setRoles($roles);
-            $user->setCreatedAt(new \DateTime('@' . strtotime('now')));
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // encode the plain password
+    //         $user->setPassword(
+    //             $passwordEncoder->encodePassword(
+    //                 $user,
+    //                 $form->get('plainPassword')->getData()
+    //             )
+    //         );
+    //         $roles = ['ROLE_ADMIN'];
+    //         $user->setRoles($roles);
+    //         $user->setCreatedAt(new \DateTime('@' . strtotime('now')));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+    //         // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
-        }
+    //         return $guardHandler->authenticateUserAndHandleSuccess(
+    //             $user,
+    //             $request,
+    //             $authenticator,
+    //             'main' // firewall name in security.yaml
+    //         );
+    //     }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('registration/register.html.twig', [
+    //         'registrationForm' => $form->createView(),
+    //     ]);
+    // }
 }
