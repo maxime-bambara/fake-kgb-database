@@ -31,6 +31,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $roles = ['ROLE_ADMIN'];
+            $user->setRoles($roles);
+            $user->setCreatedAt(new \DateTime('@' . strtotime('now')));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
