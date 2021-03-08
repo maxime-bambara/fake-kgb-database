@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class MissionsController extends AbstractController
@@ -27,10 +29,12 @@ class MissionsController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/missions/new", name="app.missions.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+
         $mission = new Missions();
         $form = $this->createForm(MissionsType::class, $mission);
         $form->handleRequest($request);
@@ -66,6 +70,7 @@ class MissionsController extends AbstractController
 
     /**
      * @Route("/missions/{id}/edit", name="app.missions.edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Missions $mission): Response
     {
@@ -91,6 +96,7 @@ class MissionsController extends AbstractController
 
     /**
      * @Route("/missions/{id}", name="app.missions.delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Missions $mission): Response
     {

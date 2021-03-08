@@ -9,10 +9,6 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<th>Id</th>
-				<td>{{ mission.id }}</td>
-			</tr>
-			<tr>
 				<th>Title</th>
 				<td>{{ mission.title }}</td>
 			</tr>
@@ -25,8 +21,22 @@
 				<td>{{ mission.code }}</td>
 			</tr>
 			<tr>
+				<th>Skill</th>
+				<td>
+					{{mission.skills.name}}
+				</td>
+			</tr>
+			<tr>
 				<th>Country</th>
 				<td>{{ mission.country }}</td>
+			</tr>
+			<tr>
+				<th>Targets</th>
+				<td>
+					{% for targets in mission.targets %}
+						<li>{{targets.alias}}</li>
+					{% endfor %}
+				</td>
 			</tr>
 			<tr>
 				<th>Agents</th>
@@ -34,6 +44,20 @@
 					{% for agents in mission.agents %}
 						<li>{{agents.code}}</li>
 					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<th>Contacts</th>
+				<td>
+					{% for contacts in mission.contacts %}
+						<li>{{contacts.code}}</li>
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<th>Hideaway</th>
+				<td>
+					{{mission.hideaway.alias}}
 				</td>
 			</tr>
 			<tr>
@@ -49,7 +73,8 @@
 
 	<a href="{{ path('app.home') }}">back to list</a>
 
-	<a href="{{ path('app.missions.edit', {'id': mission.id}) }}">edit</a>
-
-	{{ include('missions/_delete_form.html.twig') }}
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('app.missions.edit', {'id': mission.id}) }}">edit</a>
+		{{ include('missions/_delete_form.html.twig') }}
+	{% endif %}
 {% endblock %}

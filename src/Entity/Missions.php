@@ -301,12 +301,12 @@ class Missions
         return true;
     }
 
-    public function hIdeawayIsValid()
+    public function hideawayIsValid()
     {
         $dataCountry = $this->country;
         $dataHideaway = $this->hideaway;
 
-        if ($dataCountry != $dataHideaway) {
+        if ($dataCountry != $dataHideaway->getCountry()) {
             return false;
         }
         return true;
@@ -321,7 +321,7 @@ class Missions
 
         foreach ($dataAgents as $agent) {
             $agentSkills = $agent->displaySkills();
-            if (in_array($dataSkills, $agentSkills)) {
+            if (in_array($dataSkills->getName(), $agentSkills)) {
                 $validSkillsAgents += 1;
             }
             if ($validSkillsAgents == 0) {
