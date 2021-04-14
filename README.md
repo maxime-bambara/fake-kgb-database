@@ -1,6 +1,10 @@
 Projet d'étude : GRADUATE Developpeur Web / Web Mobile
 URL site : https://project-kgb-missions.herokuapp.com/
 
+Pour tester l'appli en tant qu'Admin, utilisez le compte suivant :
+email : studi.project.john.doe@gmail.com
+mpd : adminstudijd
+
 Application réaliser avec le framework Symfony
 Contexte projet : 
 Les agents ont un nom, un prénom, une date de naissance, un code d'identification, une nationalité, 1 ou plusieurs spécialités.
